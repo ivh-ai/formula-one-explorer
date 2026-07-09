@@ -24,7 +24,10 @@
       "Bash(npx tsc *)",
       "Bash(npm run *)",
       "Bash(npx vitest *)",
-      "Bash(git commit -q -m 'chore: scaffold Next.js app with tooling *)"
+      "Bash(git commit -q -m 'chore: scaffold Next.js app with tooling *)",
+      "Bash(curl -s \"https://api.jolpi.ca/ergast/f1/2026/constructors.json\")",
+      "Bash(python3 -m json.tool)",
+      "Bash(git commit -q -m 'feat: design tokens and team metadata *)"
     ]
   }
 }

@@ -126,5 +126,86 @@
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Formula One Explorer design tokens
+ * ------------------------------------------------------------------------- */
+
+:root {
+  --glass: oklch(1 0 0 / 62%);
+  --glass-border: oklch(0.922 0 0 / 70%);
+  --carbon-line: oklch(0.145 0 0 / 4.5%);
+  --live: oklch(0.63 0.21 25);
+}
+
+.dark {
+  --glass: oklch(0.205 0 0 / 55%);
+  --glass-border: oklch(1 0 0 / 12%);
+  --carbon-line: oklch(1 0 0 / 4%);
+  --live: oklch(0.68 0.2 25);
+}
+
+@utility glass-panel {
+  background-color: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+}
+
+@utility carbon-texture {
+  background-image: repeating-linear-gradient(
+      45deg,
+      var(--carbon-line) 0px,
+      var(--carbon-line) 1px,
+      transparent 1px,
+      transparent 6px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      var(--carbon-line) 0px,
+      var(--carbon-line) 1px,
+      transparent 1px,
+      transparent 6px
+    );
+}
+
+@utility heading-editorial {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+@utility timing-mono {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Pulse for the LIVE indicator — disabled under reduced motion. */
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.animate-live-pulse {
+  animation: live-pulse 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-live-pulse {
+    animation: none;
   }
 }
