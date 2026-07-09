@@ -28,7 +28,8 @@
       "Bash(curl -s \"https://api.jolpi.ca/ergast/f1/2026/constructors.json\")",
       "Bash(python3 -m json.tool)",
       "Bash(git commit -q -m 'feat: design tokens and team metadata *)",
-      "Bash(git commit -q -m 'feat: app shell with navigation, providers, settings *)"
+      "Bash(git commit -q -m 'feat: app shell with navigation, providers, settings *)",
+      "Bash(git commit -q -m 'feat: resilient fetchJson wrapper *)"
     ]
   }
 }
