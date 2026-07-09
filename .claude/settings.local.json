@@ -42,7 +42,10 @@
       "Bash(git commit -q -m 'feat: Jolpica client, domain models, mappers *)",
       "Bash(curl -s \"https://api.openf1.org/v1/sessions?session_key=latest\")",
       "Bash(curl -s \"https://api.openf1.org/v1/intervals?session_key=9998&driver_number=1\")",
-      "Bash(git commit -q -m 'feat: OpenF1 live data client and Open-Meteo weather client *)"
+      "Bash(git commit -q -m 'feat: OpenF1 live data client and Open-Meteo weather client *)",
+      "Bash(curl -s \"https://api.jolpi.ca/ergast/f1/2026/drivers.json?limit=40\")",
+      "Bash(python3 -c ' *)",
+      "Bash(git commit -q -m 'feat: driver enrichment content *)"
     ]
   }
 }
