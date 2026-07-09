@@ -47,7 +47,8 @@
       "Bash(python3 -c ' *)",
       "Bash(git commit -q -m 'feat: driver enrichment content *)",
       "Bash(git commit -q -m 'feat: shared UI kit and formatting utilities *)",
-      "Bash(git commit -q -m 'feat: standings pages with progression charts *)"
+      "Bash(git commit -q -m 'feat: standings pages with progression charts *)",
+      "Bash(git commit -q -m 'feat: race calendar with countdowns *)"
     ]
   }
 }
