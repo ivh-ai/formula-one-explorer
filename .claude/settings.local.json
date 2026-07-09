@@ -29,7 +29,17 @@
       "Bash(python3 -m json.tool)",
       "Bash(git commit -q -m 'feat: design tokens and team metadata *)",
       "Bash(git commit -q -m 'feat: app shell with navigation, providers, settings *)",
-      "Bash(git commit -q -m 'feat: resilient fetchJson wrapper *)"
+      "Bash(git commit -q -m 'feat: resilient fetchJson wrapper *)",
+      "Bash(curl -s \"https://api.jolpi.ca/ergast/f1/2024/5/results.json?limit=3\")",
+      "Bash(curl -s \"https://api.jolpi.ca/ergast/f1/2024/5/qualifying.json?limit=2\")",
+      "Bash(curl -s \"https://api.jolpi.ca/ergast/f1/2024/5/sprint.json?limit=2\")",
+      "Bash(curl -s \"https://api.jolpi.ca/ergast/f1/2024/driverstandings.json?limit=2\")",
+      "Bash(curl -s \"https://api.jolpi.ca/ergast/f1/2024.json?limit=2\")",
+      "Bash(python3 -m json.tool schedule.json)",
+      "Bash(python3 -m json.tool dstandings.json)",
+      "Bash(python3 -m json.tool quali.json)",
+      "Bash(python3 -m json.tool sprint.json)",
+      "Bash(git commit -q -m 'feat: Jolpica client, domain models, mappers *)"
     ]
   }
 }
