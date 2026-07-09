@@ -46,7 +46,8 @@
       "Bash(curl -s \"https://api.jolpi.ca/ergast/f1/2026/drivers.json?limit=40\")",
       "Bash(python3 -c ' *)",
       "Bash(git commit -q -m 'feat: driver enrichment content *)",
-      "Bash(git commit -q -m 'feat: shared UI kit and formatting utilities *)"
+      "Bash(git commit -q -m 'feat: shared UI kit and formatting utilities *)",
+      "Bash(git commit -q -m 'feat: standings pages with progression charts *)"
     ]
   }
 }
