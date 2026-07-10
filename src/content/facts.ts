@@ -1,0 +1,28 @@
+export type F1Fact = { fact: string; category: string };
+
+export const F1_FACTS: F1Fact[] = [
+  { fact: "An F1 car can go from 0 to 100 km/h and back to 0 in under five seconds.", category: "Performance" },
+  { fact: "F1 drivers experience up to 6g of lateral force in fast corners — more than astronauts feel at launch.", category: "Human limits" },
+  { fact: "A modern pit stop changes all four wheels in around two seconds; the record is 1.80 seconds.", category: "Pit stops" },
+  { fact: "At full speed, an F1 car generates enough downforce to theoretically drive upside down in a tunnel.", category: "Aerodynamics" },
+  { fact: "Drivers can lose up to 3 kg of body weight during a hot race like Singapore.", category: "Human limits" },
+  { fact: "The 2026 power units run on 100% sustainable fuel with a near 50/50 split between combustion and electric power.", category: "Technology" },
+  { fact: "Brake discs reach over 1,000°C — hotter than lava — and are made of carbon fiber.", category: "Technology" },
+  { fact: "Ferrari has competed in every Formula One season since the first in 1950.", category: "History" },
+  { fact: "Juan Manuel Fangio won five titles with four different teams — in a 52-race career.", category: "History" },
+  { fact: "The Monaco Grand Prix's average speed is barely half that of Monza, yet it's the hardest race to win from behind.", category: "Circuits" },
+  { fact: "An F1 steering wheel has over 20 buttons and dials and costs more than a luxury car.", category: "Technology" },
+  { fact: "Teams transport over 50 tonnes of equipment to every race — flyaway races use up to seven Boeing 747s.", category: "Logistics" },
+  { fact: "The 107% rule requires every qualifier to lap within 107% of the fastest Q1 time to be allowed to race.", category: "Rules" },
+  { fact: "A Formula 1 engine's pistons travel up and down about 250 times per second at full revs.", category: "Technology" },
+  { fact: "Max Verstappen won his first Grand Prix at 18 years and 228 days — a record unlikely to fall soon.", category: "Records" },
+  { fact: "The safety car is a full-spec performance car driven flat out — F1 cars still overheat behind it.", category: "Racing" },
+  { fact: "Silverstone, home of the first world championship race in 1950, was a WWII bomber airfield.", category: "History" },
+  { fact: "Tire warmers heat slicks to about 70°C before a run; cold F1 tires grip worse than road tires.", category: "Tires" },
+  { fact: "In 1976 Niki Lauda returned to racing 40 days after receiving last rites following his Nürburgring crash.", category: "History" },
+  { fact: "DRS opens a flap in the rear wing worth roughly 10–12 km/h of straight-line speed.", category: "Rules" },
+  { fact: "F1 cars don't refuel during races — they start with up to 110 kg of fuel and manage it to the flag.", category: "Rules" },
+  { fact: "The halo cockpit protection device can support the weight of a London double-decker bus.", category: "Safety" },
+  { fact: "Lewis Hamilton holds the records for most wins, poles and podiums in Formula One history.", category: "Records" },
+  { fact: "Aerodynamicists measure downforce in 'points' — a single point is worth roughly a hundredth of a second per lap.", category: "Aerodynamics" },
+];

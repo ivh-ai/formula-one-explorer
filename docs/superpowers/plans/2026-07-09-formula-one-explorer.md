@@ -35,12 +35,12 @@
 **Interfaces:**
 - Produces: working `npm run dev`, `npm run build`, `npx vitest run`.
 
-- [ ] Step 1: `npx create-next-app@latest . --ts --tailwind --eslint --app --src-dir --import-alias "@/*" --no-turbopack` (accept existing dir; move conflicting files if needed)
-- [ ] Step 2: Install deps: `npm i motion @tanstack/react-query recharts lucide-react clsx tailwind-merge class-variance-authority && npm i -D vitest @vitejs/plugin-react jsdom @testing-library/react`
-- [ ] Step 3: `npx shadcn@latest init` (neutral base) then `npx shadcn@latest add button card badge tabs table select dialog command tooltip separator skeleton switch accordion progress`
-- [ ] Step 4: Add `vitest.config.ts` (react plugin, jsdom, alias `@` → `./src`) and a passing smoke test; add `"test": "vitest run"` script
-- [ ] Step 5: Verify gate: `npx tsc --noEmit && npm run lint && npx vitest run && npm run build` → all pass
-- [ ] Step 6: Commit `chore: scaffold Next.js app with tooling`
+- [x] Step 1: `npx create-next-app@latest . --ts --tailwind --eslint --app --src-dir --import-alias "@/*" --no-turbopack` (accept existing dir; move conflicting files if needed)
+- [x] Step 2: Install deps: `npm i motion @tanstack/react-query recharts lucide-react clsx tailwind-merge class-variance-authority && npm i -D vitest @vitejs/plugin-react jsdom @testing-library/react`
+- [x] Step 3: `npx shadcn@latest init` (neutral base) then `npx shadcn@latest add button card badge tabs table select dialog command tooltip separator skeleton switch accordion progress`
+- [x] Step 4: Add `vitest.config.ts` (react plugin, jsdom, alias `@` → `./src`) and a passing smoke test; add `"test": "vitest run"` script
+- [x] Step 5: Verify gate: `npx tsc --noEmit && npm run lint && npx vitest run && npm run build` → all pass
+- [x] Step 6: Commit `chore: scaffold Next.js app with tooling`
 
 ### Task 2: Design tokens + global styles
 
@@ -52,10 +52,10 @@
 - Produces: CSS vars `--background`, `--foreground`, `--glass`, `--carbon` etc.; utility classes `.glass-panel`, `.carbon-texture`; `TEAM_META: Record<string, TeamMeta>` where `TeamMeta = { constructorId: string; name: string; shortName: string; color: string; secondaryColor: string; base: string; principal: string; powerUnit: string; firstEntry: number; championships: number; funFacts: string[] }` keyed by Jolpica constructorId (`red_bull`, `ferrari`, `mercedes`, `mclaren`, `aston_martin`, `alpine`, `williams`, `rb`, `sauber`, `haas`, + historical: `lotus`, `brabham`, `tyrrell`, `benetton`, `renault`, `brawn`, `cooper`, `matra`, `bmw_sauber`, `jordan`).
 - Produces: `getTeamMeta(constructorId: string): TeamMeta | undefined`, `getTeamColor(constructorId: string): string` (falls back to neutral gray).
 
-- [ ] Step 1: Define light/dark token sets in `globals.css` (neutral premium palette per spec), `.glass-panel` (backdrop-blur + translucent bg + border), `.carbon-texture` (subtle repeating-linear-gradient), editorial heading utilities
-- [ ] Step 2: Write `team-meta.ts` with all 10 current teams + ~10 historical, real 2026 data (principal, PU, base)
-- [ ] Step 3: Test `src/content/teams/__tests__/team-meta.test.ts`: every meta has valid hex color; `getTeamColor('unknown_team')` returns fallback
-- [ ] Step 4: Verify gate; commit `feat: design tokens and team metadata`
+- [x] Step 1: Define light/dark token sets in `globals.css` (neutral premium palette per spec), `.glass-panel` (backdrop-blur + translucent bg + border), `.carbon-texture` (subtle repeating-linear-gradient), editorial heading utilities
+- [x] Step 2: Write `team-meta.ts` with all 10 current teams + ~10 historical, real 2026 data (principal, PU, base)
+- [x] Step 3: Test `src/content/teams/__tests__/team-meta.test.ts`: every meta has valid hex color; `getTeamColor('unknown_team')` returns fallback
+- [x] Step 4: Verify gate; commit `feat: design tokens and team metadata`
 
 ### Task 3: App shell — nav, footer, providers, settings
 
@@ -69,10 +69,10 @@
 **Interfaces:**
 - Produces: `NAV_LINKS: { label: string; href: string; group: 'explore'|'learn'|'data' }[]`; `useSettings(): { settings, setTheme, setReducedMotion }`.
 
-- [ ] Step 1: Build sticky glass header: logo wordmark "F1 Explorer", grouped dropdown nav (Explore: Seasons/Teams/Drivers/Circuits/Calendar/History; Learn: Learn/Rules/Glossary; Data: Standings/Live/Stats/Compare/Simulators), search trigger button (wired in Task 30), theme toggle
-- [ ] Step 2: Mobile sheet nav; footer with section links + data attribution (Jolpica/OpenF1/Open-Meteo)
-- [ ] Step 3: Settings page: theme select, reduced-motion switch, data-source attribution, localStorage persisted
-- [ ] Step 4: Verify gate + `npm run build`; commit `feat: app shell with navigation, providers, settings`
+- [x] Step 1: Build sticky glass header: logo wordmark "F1 Explorer", grouped dropdown nav (Explore: Seasons/Teams/Drivers/Circuits/Calendar/History; Learn: Learn/Rules/Glossary; Data: Standings/Live/Stats/Compare/Simulators), search trigger button (wired in Task 30), theme toggle
+- [x] Step 2: Mobile sheet nav; footer with section links + data attribution (Jolpica/OpenF1/Open-Meteo)
+- [x] Step 3: Settings page: theme select, reduced-motion switch, data-source attribution, localStorage persisted
+- [x] Step 4: Verify gate + `npm run build`; commit `feat: app shell with navigation, providers, settings`
 
 ---
 
@@ -92,10 +92,10 @@
   ```
 - Behavior: default timeoutMs 10000, retries 2 with exponential backoff (300ms base, only on network/timeout/5xx), passes `next: { revalidate, tags }` to fetch.
 
-- [ ] Step 1: Write failing tests (mock global fetch): success returns ok:true; 404 → kind 'http' status 404, no retry; 500 retried then fails; network error retried; invalid JSON → 'parse'; timeout aborts → 'timeout'
-- [ ] Step 2: Run tests → fail (module missing)
-- [ ] Step 3: Implement `fetchJson`
-- [ ] Step 4: Tests pass; verify gate; commit `feat: resilient fetchJson wrapper`
+- [x] Step 1: Write failing tests (mock global fetch): success returns ok:true; 404 → kind 'http' status 404, no retry; 500 retried then fails; network error retried; invalid JSON → 'parse'; timeout aborts → 'timeout'
+- [x] Step 2: Run tests → fail (module missing)
+- [x] Step 3: Implement `fetchJson`
+- [x] Step 4: Tests pass; verify gate; commit `feat: resilient fetchJson wrapper`
 
 ### Task 5: Jolpica client + domain models + mappers
 
@@ -111,10 +111,10 @@
 - Produces client fns (all return `ApiResult<...>`, all take year and apply `revalidateFor(year)`):
   `getSeasons()`, `getSchedule(year)`, `getRaceResults(year, round)`, `getQualifying(year, round)`, `getSprintResults(year, round)`, `getDriverStandings(year, round?)`, `getConstructorStandings(year, round?)`, `getDrivers(year)`, `getConstructors(year)`, `getDriver(driverId)`, `getDriverResults(driverId, opts?)` (paginated, limit 100), `getDriverSeasonsStandings(driverId)`, `getConstructorResults(constructorId)`, `getCircuits(year?)`, `getCircuitResults(circuitId, limit)`.
 
-- [ ] Step 1: Write mapper tests with realistic captured Jolpica JSON fixtures (schedule w/ sprint weekend, race results w/ fastest lap + DNF status, standings w/ multi-constructor driver, qualifying w/ missing Q3)
-- [ ] Step 2: Run → fail
-- [ ] Step 3: Implement types, mappers (defensive: missing fields → null/defaults), client fns building URLs like `${BASE}/${year}/${round}/results.json?limit=100`
-- [ ] Step 4: Tests pass; verify gate; commit `feat: Jolpica client, domain models, mappers`
+- [x] Step 1: Write mapper tests with realistic captured Jolpica JSON fixtures (schedule w/ sprint weekend, race results w/ fastest lap + DNF status, standings w/ multi-constructor driver, qualifying w/ missing Q3)
+- [x] Step 2: Run → fail
+- [x] Step 3: Implement types, mappers (defensive: missing fields → null/defaults), client fns building URLs like `${BASE}/${year}/${round}/results.json?limit=100`
+- [x] Step 4: Tests pass; verify gate; commit `feat: Jolpica client, domain models, mappers`
 
 ### Task 6: OpenF1 client
 
@@ -126,10 +126,10 @@
 - Produces fns: `getLatestSession()`, `getSessionsForYear(year)`, `getSessionDrivers(sessionKey)`, `getPositions(sessionKey, sinceIso?)`, `getIntervals(sessionKey, sinceIso?)`, `getLaps(sessionKey, sinceLap?)`, `getPits(sessionKey)`, `getStints(sessionKey)`, `getRaceControl(sessionKey)`, `getSessionWeather(sessionKey)`, `getTeamRadio(sessionKey)`. All keyless GETs like `${BASE}/sessions?session_key=latest`; live fns use `revalidate: 0`.
 - Produces `deriveSessionStatus(session: LiveSession, nowUtc: Date): 'live' | 'recent' | 'none'` — live if now within [start-10min, end+30min]; recent if ended within 14 days.
 
-- [ ] Step 1: Failing tests for mappers (snake_case→camel, nulls) and `deriveSessionStatus` boundaries
-- [ ] Step 2: Run → fail
-- [ ] Step 3: Implement
-- [ ] Step 4: Pass; verify gate; commit `feat: OpenF1 live data client`
+- [x] Step 1: Failing tests for mappers (snake_case→camel, nulls) and `deriveSessionStatus` boundaries
+- [x] Step 2: Run → fail
+- [x] Step 3: Implement
+- [x] Step 4: Pass; verify gate; commit `feat: OpenF1 live data client`
 
 ### Task 7: Weather client
 
@@ -139,8 +139,8 @@
 **Interfaces:**
 - Produces: `getCircuitWeather(lat: number, lng: number): Promise<ApiResult<CircuitWeather>>` where `CircuitWeather = { currentTempC: number; precipitationMm: number; windSpeedKmh: number; weatherCode: number; daily: { date: string; maxTempC: number; minTempC: number; precipProbability: number; weatherCode: number }[] }`; `weatherCodeToLabel(code): { label: string; icon: 'sun'|'cloud'|'rain'|'storm'|'snow'|'fog' }`. Revalidate 1800.
 
-- [ ] Step 1: Failing tests (mapper from Open-Meteo fixture; weatherCode buckets)
-- [ ] Step 2: Implement; pass; verify gate; commit `feat: Open-Meteo weather client`
+- [x] Step 1: Failing tests (mapper from Open-Meteo fixture; weatherCode buckets)
+- [x] Step 2: Implement; pass; verify gate; commit `feat: Open-Meteo weather client`
 
 ### Task 8: Driver enrichment content
 
@@ -150,8 +150,8 @@
 **Interfaces:**
 - Produces: `DriverMeta = { driverId: string; bio: string; drivingStyle: string; helmetColors: [string, string]; rivalries: string[]; highlights: string[]; funFacts: string[] }`; `DRIVER_META` for all 2026 grid drivers + ~15 legends (senna, prost, schumacher, michael_schumacher id etc. — use Jolpica ids); `getDriverMeta(driverId)`.
 
-- [ ] Step 1: Write content (real, accurate); test: every entry has non-empty bio, ≥2 funFacts, valid hex helmet colors
-- [ ] Step 2: Verify gate; commit `feat: driver enrichment content`
+- [x] Step 1: Write content (real, accurate); test: every entry has non-empty bio, ≥2 funFacts, valid hex helmet colors
+- [x] Step 2: Verify gate; commit `feat: driver enrichment content`
 
 ---
 
@@ -167,10 +167,10 @@
 - Produces: `DataTable<T>({ columns: { key, header, align?, render }[], rows: T[], rowKey })`; `StatCard({ label, value, sub?, accentColor? })`; `CountryFlag({ nationality, size? })`; `ErrorNote({ error, context })`; `EmptyState({ title, message, icon? })`.
 - Consumes: `getTeamColor` (Task 2).
 
-- [ ] Step 1: Failing tests for `format.ts` + `countries.ts` (nationality "Dutch"→"nl", "Monegasque"→"mc", unknown→null) 
-- [ ] Step 2: Implement utils; pass
-- [ ] Step 3: Build components
-- [ ] Step 4: Verify gate; commit `feat: shared UI kit`
+- [x] Step 1: Failing tests for `format.ts` + `countries.ts` (nationality "Dutch"→"nl", "Monegasque"→"mc", unknown→null) 
+- [x] Step 2: Implement utils; pass
+- [x] Step 3: Build components
+- [x] Step 4: Verify gate; commit `feat: shared UI kit`
 
 ### Task 10: Standings pages
 
@@ -183,10 +183,10 @@
 - Produces: `ProgressionSeries { id, label, color, points: { round: number; total: number }[] }`; `getSeasonResultsBulk(year): ApiResult<RaceResultRow[][]>` added to jolpica.ts (paginated fetch-all).
 - Consumes: DataTable, YearSelector; standings fns (Task 5).
 
-- [ ] Step 1: Failing test for progression accumulation (fixture: 2 rounds + sprint; verifies cumulative totals and constructor sum of both drivers)
-- [ ] Step 2: Implement service; pass
-- [ ] Step 3: Build pages: standings table (position, driver/team chip w/ color bar, points, wins, gap to leader), year selector 1950–current, progression chart (top 10 series), constructor page analogous
-- [ ] Step 4: Verify gate + build; commit `feat: standings pages with progression charts`
+- [x] Step 1: Failing test for progression accumulation (fixture: 2 rounds + sprint; verifies cumulative totals and constructor sum of both drivers)
+- [x] Step 2: Implement service; pass
+- [x] Step 3: Build pages: standings table (position, driver/team chip w/ color bar, points, wins, gap to leader), year selector 1950–current, progression chart (top 10 series), constructor page analogous
+- [x] Step 4: Verify gate + build; commit `feat: standings pages with progression charts`
 
 ### Task 11: Calendar page + countdown
 
@@ -197,10 +197,10 @@
 **Interfaces:**
 - Produces: `Countdown({ targetIso })`, `getNextRace` reused by home page.
 
-- [ ] Step 1: Failing tests countdown math + getNextRace (skips past races, returns null after finale)
-- [ ] Step 2: Implement; pass
-- [ ] Step 3: Calendar page: year selector reuse, grid of race cards (round, name, circuit, country flag, date, sprint badge, status: completed w/ winner? upcoming w/ countdown for next), past races link to `/seasons/[year]/[round]`
-- [ ] Step 4: Verify gate; commit `feat: race calendar with countdowns`
+- [x] Step 1: Failing tests countdown math + getNextRace (skips past races, returns null after finale)
+- [x] Step 2: Implement; pass
+- [x] Step 3: Calendar page: year selector reuse, grid of race cards (round, name, circuit, country flag, date, sprint badge, status: completed w/ winner? upcoming w/ countdown for next), past races link to `/seasons/[year]/[round]`
+- [x] Step 4: Verify gate; commit `feat: race calendar with countdowns`
 
 ### Task 12: Home page
 
@@ -211,10 +211,10 @@
 **Interfaces:**
 - Consumes: `getSchedule`, `getDriverStandings`, `getConstructorStandings`, `getNextRace`, `Countdown`, `StatCard`, `FadeIn`.
 
-- [ ] Step 1: Hero: animated gradient + checkered/carbon motif, editorial headline ("Understand every second of Formula One"), CTAs → /learn and /live, animated speed-lines (CSS, reduced-motion-safe)
-- [ ] Step 2: Next race panel (countdown, circuit, weekend session times), championship leaders (top 3 drivers + top 3 constructors with team colors), animated stat strip (races this season, drivers, circuits, seasons since 1950), rotating fact card, featured lessons grid (static picks), section CTAs
-- [ ] Step 3: Every data panel handles `ok:false` with ErrorNote inline
-- [ ] Step 4: Verify gate + build; commit `feat: home page`
+- [x] Step 1: Hero: animated gradient + checkered/carbon motif, editorial headline ("Understand every second of Formula One"), CTAs → /learn and /live, animated speed-lines (CSS, reduced-motion-safe)
+- [x] Step 2: Next race panel (countdown, circuit, weekend session times), championship leaders (top 3 drivers + top 3 constructors with team colors), animated stat strip (races this season, drivers, circuits, seasons since 1950), rotating fact card, featured lessons grid (static picks), section CTAs
+- [x] Step 3: Every data panel handles `ok:false` with ErrorNote inline
+- [x] Step 4: Verify gate + build; commit `feat: home page`
 
 ### Task 13: Drivers index + profile
 
@@ -227,11 +227,11 @@
 - Produces: `CareerSummary { starts, wins, podiums, poles, fastestLaps, points, championships, firstRace: { year, raceName }, lastRace: {...}, teams: { constructorId, name, years: string }[], seasonBreakdown: { year, team, points, position, wins, podiums }[] }`.
 - Consumes: `getDrivers(CURRENT_SEASON)`, `getDriver`, `getDriverResults`, `getDriverSeasonsStandings`, `getDriverMeta`.
 
-- [ ] Step 1: Failing tests for `buildCareerSummary` (fixture with win, podium, pole-from-grid-1, DNF, multi-team)
-- [ ] Step 2: Implement; pass
-- [ ] Step 3: Index: current-grid cards (number, name, flag, team color accent, helmet-color stripe) + note that any historical driver page is reachable via search/season pages
-- [ ] Step 4: Profile: header (name, number, flag, team), StatCard row (wins/podiums/poles/points/championships), bio + driving style + rivalries + highlights (from meta, hidden if absent), season-by-season table + chart, career timeline
-- [ ] Step 5: Verify gate; commit `feat: driver pages`
+- [x] Step 1: Failing tests for `buildCareerSummary` (fixture with win, podium, pole-from-grid-1, DNF, multi-team)
+- [x] Step 2: Implement; pass
+- [x] Step 3: Index: current-grid cards (number, name, flag, team color accent, helmet-color stripe) + note that any historical driver page is reachable via search/season pages
+- [x] Step 4: Profile: header (name, number, flag, team), StatCard row (wins/podiums/poles/points/championships), bio + driving style + rivalries + highlights (from meta, hidden if absent), season-by-season table + chart, career timeline
+- [x] Step 5: Verify gate; commit `feat: driver pages`
 
 ### Task 14: Teams index + profile
 
@@ -243,10 +243,10 @@
 **Interfaces:**
 - Consumes: `getConstructors(CURRENT_SEASON)`, `getConstructorResults`, TEAM_META, `getConstructorStandings`.
 
-- [ ] Step 1: Failing test `buildTeamSummary`; implement; pass
-- [ ] Step 2: Index: current teams grid, carbon-texture cards with team color top-bar, principal/base/PU from meta
-- [ ] Step 3: Team page: header w/ color gradient, overview (meta), current drivers (from season driver standings filtered by constructor), stats row, championships list, season results table, timeline of eras + funFacts
-- [ ] Step 4: Verify gate; commit `feat: team pages`
+- [x] Step 1: Failing test `buildTeamSummary`; implement; pass
+- [x] Step 2: Index: current teams grid, carbon-texture cards with team color top-bar, principal/base/PU from meta
+- [x] Step 3: Team page: header w/ color gradient, overview (meta), current drivers (from season driver standings filtered by constructor), stats row, championships list, season results table, timeline of eras + funFacts
+- [x] Step 4: Verify gate; commit `feat: team pages`
 
 ### Task 15: Circuit content (SVG maps + guides)
 
@@ -258,9 +258,9 @@
 - Produces: `CircuitGuide = { circuitId, lengthKm, laps, corners: number, drsZoneCount, lapRecord: { time, driver, year }, elevationNote, overtakingSpots: string[], cornerGuide: { corner: number|string; name?: string; note: string }[] (≥5 key corners), strategyNotes: string[], tireStress: 'low'|'medium'|'high', funFacts: string[] }` for all 24; `getCircuitGuide(circuitId)`, `getTrackPath(circuitId)`.
 - circuitIds use Jolpica ids: `bahrain, jeddah, albert_park, suzuka, shanghai, miami, imola, monaco, villeneuve, catalunya, red_bull_ring, silverstone, spa, hungaroring, zandvoort, monza, baku, marina_bay, americas, rodriguez, interlagos, vegas, losail, yas_marina`.
 
-- [ ] Step 1: Test: every current circuitId has guide + path; every path is non-empty valid `d` string starting with `M`; lapRecord fields present
-- [ ] Step 2: Author content (accurate data) + hand-drawn stylized SVG paths
-- [ ] Step 3: Verify gate; commit `feat: circuit guides and track map content`
+- [x] Step 1: Test: every current circuitId has guide + path; every path is non-empty valid `d` string starting with `M`; lapRecord fields present
+- [x] Step 2: Author content (accurate data) + hand-drawn stylized SVG paths
+- [x] Step 3: Verify gate; commit `feat: circuit guides and track map content`
 
 ### Task 16: Circuits index + circuit page
 
@@ -271,10 +271,10 @@
 **Interfaces:**
 - Consumes: `getCircuits(CURRENT_SEASON)`, `getCircuitResults(circuitId, 10)` (winners), `getCircuitWeather`, guides/paths (Task 15).
 
-- [ ] Step 1: Index: card grid with mini track map, country flag, corners/length
-- [ ] Step 2: Circuit page: hero w/ animated TrackMap + DRS zones legend, stat row (length, laps, corners, lap record), corner-by-corner accordion, strategy + tire notes, current weather + 3-day forecast, past winners table, fun facts
-- [ ] Step 3: Circuits not in guides (historical) render API-only fallback layout
-- [ ] Step 4: Verify gate + build; commit `feat: circuit pages with animated track maps`
+- [x] Step 1: Index: card grid with mini track map, country flag, corners/length
+- [x] Step 2: Circuit page: hero w/ animated TrackMap + DRS zones legend, stat row (length, laps, corners, lap record), corner-by-corner accordion, strategy + tire notes, current weather + 3-day forecast, past winners table, fun facts
+- [x] Step 3: Circuits not in guides (historical) render API-only fallback layout
+- [x] Step 4: Verify gate + build; commit `feat: circuit pages with animated track maps`
 
 ### Task 17: Seasons archive + race pages
 
@@ -286,10 +286,10 @@
 **Interfaces:**
 - Consumes: `getSeasons`, `getSchedule(year)`, `getDriverStandings(year)`, `getConstructorStandings(year)`, `getRaceResults`, `getQualifying`, `getSprintResults`, SEASON_NOTES.
 
-- [ ] Step 1: Seasons index: decade-grouped year grid with champion name (from standings, lazy per-decade acceptable: use static champions list in `src/content/history/champions.ts` `WORLD_CHAMPIONS: Record<number, { driver: string; team: string }>` 1950–2025 to avoid API storm) — add champions.ts with test (76 entries)
-- [ ] Step 2: Season page: header (year, champion callouts), full calendar table w/ winners links, final standings (both), season notes if landmark
-- [ ] Step 3: Race page: header (race, circuit link, date), tabs: race results (pos, driver, team, grid, time/status, points, fastest lap badge), qualifying (Q1/Q2/Q3), sprint if exists; position-changes strip (top gainers/losers)
-- [ ] Step 4: Verify gate + build; commit `feat: seasons archive and race detail pages`
+- [x] Step 1: Seasons index: decade-grouped year grid with champion name (from standings, lazy per-decade acceptable: use static champions list in `src/content/history/champions.ts` `WORLD_CHAMPIONS: Record<number, { driver: string; team: string }>` 1950–2025 to avoid API storm) — add champions.ts with test (76 entries)
+- [x] Step 2: Season page: header (year, champion callouts), full calendar table w/ winners links, final standings (both), season notes if landmark
+- [x] Step 3: Race page: header (race, circuit link, date), tabs: race results (pos, driver, team, grid, time/status, points, fastest lap badge), qualifying (Q1/Q2/Q3), sprint if exists; position-changes strip (top gainers/losers)
+- [x] Step 4: Verify gate + build; commit `feat: seasons archive and race detail pages`
 
 ---
 
@@ -303,9 +303,9 @@
 **Interfaces:**
 - Produces: `ERAS: { id, name, years: string, summary: string, keyCars: string[], keyDrivers: string[], moments: { year: number; title: string; description: string }[] }[]` — 8 eras (1950s front-engine → ground effect 2022+), ≥3 moments each.
 
-- [ ] Step 1: Author eras content
-- [ ] Step 2: Page: scroll-animated vertical era timeline, champions-by-decade grid (champions.ts), notable moments cards, link CTAs to seasons
-- [ ] Step 3: Verify gate; commit `feat: history section`
+- [x] Step 1: Author eras content
+- [x] Step 2: Page: scroll-animated vertical era timeline, champions-by-decade grid (champions.ts), notable moments cards, link CTAs to seasons
+- [x] Step 3: Verify gate; commit `feat: history section`
 
 ### Task 19: Stats explorer
 
@@ -316,9 +316,9 @@
 - Produces: `ALL_TIME_RECORDS: { category: string; records: { holder: string; value: string; detail: string }[] }[]` (wins, poles, titles, podiums, starts, youngest/oldest winners, constructor records — accurate as of 2026-07).
 - Consumes: current-season data for "this season in numbers" panel (computed from `getSeasonResultsBulk`).
 
-- [ ] Step 1: Records content + season-in-numbers service fn `computeSeasonStats(results): { differentWinners, differentPolesitters?, avgFinishersPerRace, dnfCount, closestMargin }` + test
-- [ ] Step 2: Page: record boards by category, season-in-numbers stat cards, wins-by-team donut (Recharts), points distribution bar chart
-- [ ] Step 3: Verify gate; commit `feat: statistics explorer`
+- [x] Step 1: Records content + season-in-numbers service fn `computeSeasonStats(results): { differentWinners, differentPolesitters?, avgFinishersPerRace, dnfCount, closestMargin }` + test
+- [x] Step 2: Page: record boards by category, season-in-numbers stat cards, wins-by-team donut (Recharts), points distribution bar chart
+- [x] Step 3: Verify gate; commit `feat: statistics explorer`
 
 ---
 
@@ -341,33 +341,33 @@
   ```
 - Produces: `Quiz({ questions })` (interactive, per-question feedback, score, motion), `Flashcards({ cards })` (flip animation), `GlossaryTooltip({ term, children })` (looks up glossary Task 25 — stub lookup fn now: `getGlossaryEntry(term): GlossaryEntry | undefined` in `src/content/glossary/glossary.ts` created here with initial 10 terms).
 
-- [ ] Step 1: Types + integrity test (every lesson: ≥3 sections, ≥4 quiz questions w/ valid answerIndex, ≥4 flashcards, next[] slugs resolve)
-- [ ] Step 2: Build components + 10 SVG diagrams (clean, labeled, token colors)
-- [ ] Step 3: Verify gate; commit `feat: learning platform infrastructure`
+- [x] Step 1: Types + integrity test (every lesson: ≥3 sections, ≥4 quiz questions w/ valid answerIndex, ≥4 flashcards, next[] slugs resolve)
+- [x] Step 2: Build components + 10 SVG diagrams (clean, labeled, token colors)
+- [x] Step 3: Verify gate; commit `feat: learning platform infrastructure`
 
 ### Task 21: Lessons — foundations + race-craft (8 lessons)
 
 **Files:**
 - Create: `src/content/lessons/` — `intro-to-f1.ts`, `race-weekend.ts`, `qualifying.ts`, `sprint-weekends.ts`, `championship-points.ts`, `flags.ts`, `pit-stops.ts`, `race-strategy.ts`; `src/content/lessons/registry.ts` (`LESSONS: Lesson[]`, `getLesson(slug)`)
 
-- [ ] Step 1: Author all 8 lessons fully (accurate 2026 regs: sprint format, points 25-18-15-12-10-8-6-4-2-1, fastest-lap rules as of 2026)
-- [ ] Step 2: Integrity test passes for registry
-- [ ] Step 3: Verify gate; commit `feat: foundations and race-craft lessons`
+- [x] Step 1: Author all 8 lessons fully (accurate 2026 regs: sprint format, points 25-18-15-12-10-8-6-4-2-1, fastest-lap rules as of 2026)
+- [x] Step 2: Integrity test passes for registry
+- [x] Step 3: Verify gate; commit `feat: foundations and race-craft lessons`
 
 ### Task 22: Lessons — machinery (7 lessons)
 
 **Files:**
 - Create: `cars.ts`, `aerodynamics.ts`, `power-units.ts`, `ers.ts`, `drs.ts`, `tires.ts`, `engineering.ts`; register all
 
-- [ ] Step 1: Author (2026 PU regs: ~50/50 hybrid split, sustainable fuel, active aero X/Z modes, manual override mode)
-- [ ] Step 2: Integrity + verify gate; commit `feat: machinery lessons`
+- [x] Step 1: Author (2026 PU regs: ~50/50 hybrid split, sustainable fuel, active aero X/Z modes, manual override mode)
+- [x] Step 2: Integrity + verify gate; commit `feat: machinery lessons`
 
 ### Task 23: Lessons — rules + deep dives (7 lessons)
 
 **Files:**
 - Create: `technical-regulations.ts`, `sporting-regulations.ts`, `stewards.ts`, `safety.ts`, `weather.ts`, `history-of-f1.ts`, `future-of-f1.ts`; register all
 
-- [ ] Step 1: Author; integrity + verify gate; commit `feat: rules and deep-dive lessons`
+- [x] Step 1: Author; integrity + verify gate; commit `feat: rules and deep-dive lessons`
 
 ### Task 24: Learn hub + lesson pages
 
@@ -377,9 +377,9 @@
 **Interfaces:**
 - Consumes: LESSONS registry, Quiz, Flashcards, diagrams, lesson-progress.
 
-- [ ] Step 1: Hub: hero, category-grouped lesson cards (difficulty dots, minutes, completed check), suggested path for beginners (ordered foundations)
-- [ ] Step 2: Lesson page: `generateStaticParams` from registry, editorial layout, sections w/ diagrams, takeaways/misconceptions/facts panels, quiz, flashcards, next-lesson cards, mark-complete
-- [ ] Step 3: Verify gate + build; commit `feat: learn hub and lesson pages`
+- [x] Step 1: Hub: hero, category-grouped lesson cards (difficulty dots, minutes, completed check), suggested path for beginners (ordered foundations)
+- [x] Step 2: Lesson page: `generateStaticParams` from registry, editorial layout, sections w/ diagrams, takeaways/misconceptions/facts panels, quiz, flashcards, next-lesson cards, mark-complete
+- [x] Step 3: Verify gate + build; commit `feat: learn hub and lesson pages`
 
 ### Task 25: Glossary + rules pages
 
@@ -389,9 +389,9 @@
 - Create: `src/content/rules/rules.ts` (`RULE_SECTIONS: { id, title, summary, items: { rule: string; explanation: string }[] }[]` — sporting, technical, points, penalties, parc fermé, budget cap)
 - Create: `src/app/rules/page.tsx` (accordion sections)
 
-- [ ] Step 1: Author glossary (test: ≥100 entries, unique slugs, related resolve) + rules content
-- [ ] Step 2: Build both pages
-- [ ] Step 3: Verify gate; commit `feat: glossary and rules reference`
+- [x] Step 1: Author glossary (test: ≥100 entries, unique slugs, related resolve) + rules content
+- [x] Step 2: Build both pages
+- [x] Step 3: Verify gate; commit `feat: glossary and rules reference`
 
 ---
 
@@ -408,8 +408,8 @@
 - Produces: `useLiveSession(): { session, status: 'live'|'recent'|'none', drivers, isLoading }` (query, refetch 60s); `useLiveTiming(sessionKey, enabled): { leaderboard, raceControl, weather, lastUpdated, isPolling }` (refetch 4s when live, 0 when not).
 - Consumes: openf1.ts fns (Task 6).
 
-- [ ] Step 1: Failing tests for `buildLeaderboard` (fixture: 3 drivers, out-of-order position timestamps → latest wins; retired driver via race control? use position presence + laps; gap formatting `+1.234` / `1 LAP`) and `latestPerDriver`
-- [ ] Step 2: Implement; pass; verify gate; commit `feat: live timing hooks and leaderboard builder`
+- [x] Step 1: Failing tests for `buildLeaderboard` (fixture: 3 drivers, out-of-order position timestamps → latest wins; retired driver via race control? use position presence + laps; gap formatting `+1.234` / `1 LAP`) and `latestPerDriver`
+- [x] Step 2: Implement; pass; verify gate; commit `feat: live timing hooks and leaderboard builder`
 
 ### Task 27: Live Race Center page
 
@@ -419,10 +419,10 @@
 **Interfaces:**
 - Consumes: hooks (Task 26), TrackMap (Task 16) with animated status ring.
 
-- [ ] Step 1: Status banner + graceful chain: live → most recent session ("Session Replay — data from {name}") → none (next-race countdown + CTA)
-- [ ] Step 2: Leaderboard: motion-animated row reordering, team color bars, compound chips (S red/M yellow/H white/I green/W blue), gaps monospace; race control feed w/ auto-scroll; weather panel; pit tracker; stint visualization per driver
-- [ ] Step 3: Session picker (recent sessions of the year) for replay browsing
-- [ ] Step 4: Verify gate + build; commit `feat: live race center`
+- [x] Step 1: Status banner + graceful chain: live → most recent session ("Session Replay — data from {name}") → none (next-race countdown + CTA)
+- [x] Step 2: Leaderboard: motion-animated row reordering, team color bars, compound chips (S red/M yellow/H white/I green/W blue), gaps monospace; race control feed w/ auto-scroll; weather panel; pit tracker; stint visualization per driver
+- [x] Step 3: Session picker (recent sessions of the year) for replay browsing
+- [x] Step 4: Verify gate + build; commit `feat: live race center`
 
 ---
 
@@ -437,9 +437,9 @@
 - Consumes: `buildCareerSummary` (Task 13), `buildTeamSummary` (Task 14), driver/team meta.
 - Produces: `normalizeForRadar(a: CareerSummary, b: CareerSummary): RadarDatum[]` in `src/lib/services/compare.ts` + test (each axis scaled 0–100 vs max of pair).
 
-- [ ] Step 1: Failing test `normalizeForRadar`; implement; pass
-- [ ] Step 2: Tabs: Drivers | Teams. Two pickers → side-by-side stat cards, radar chart, head-to-head bar rows (wins/podiums/poles/points/titles), career overlap note
-- [ ] Step 3: Verify gate; commit `feat: comparison tools`
+- [x] Step 1: Failing test `normalizeForRadar`; implement; pass
+- [x] Step 2: Tabs: Drivers | Teams. Two pickers → side-by-side stat cards, radar chart, head-to-head bar rows (wins/podiums/poles/points/titles), career overlap note
+- [x] Step 3: Verify gate; commit `feat: comparison tools`
 
 ### Task 29: Simulators
 
@@ -450,10 +450,10 @@
   - `scorePitStop(reactionsMs: number[]): { total: number; rating: 'legendary'|'great'|'good'|'slow' }`
 - Create: `src/app/simulators/page.tsx` (tabs), `src/components/simulators/championship-sim.tsx` (sliders: assumed finishes per contender → projected table), `tire-strategy-viz.tsx` (build stints, compare two strategies, lap-time chart + total delta), `pit-stop-game.tsx` (4-light reaction mini-game: click on green ×4 stages = wheel guns, jack, release; sum → rating vs 1.8s record)
 
-- [ ] Step 1: Failing tests for all three engines (championship: leader clinch case + mathematically-alive case; tire: pit loss counted per stop, invalid when stint laps ≠ race laps; pit game rating buckets)
-- [ ] Step 2: Implement engines; pass
-- [ ] Step 3: Build UI tabs w/ live data defaults (current standings, next circuit laps)
-- [ ] Step 4: Verify gate; commit `feat: championship, tire strategy, and pit stop simulators`
+- [x] Step 1: Failing tests for all three engines (championship: leader clinch case + mathematically-alive case; tire: pit loss counted per stop, invalid when stint laps ≠ race laps; pit game rating buckets)
+- [x] Step 2: Implement engines; pass
+- [x] Step 3: Build UI tabs w/ live data defaults (current standings, next circuit laps)
+- [x] Step 4: Verify gate; commit `feat: championship, tire strategy, and pit stop simulators`
 
 ### Task 30: Global search (Cmd+K)
 
@@ -465,9 +465,9 @@
 **Interfaces:**
 - Produces: `SearchDoc { id, type: 'driver'|'team'|'circuit'|'lesson'|'glossary'|'season'|'rule'|'page', title, subtitle, href, keywords: string[] }`.
 
-- [ ] Step 1: Failing tests: ranking (startsWith beats substring), type filter, empty query → []
-- [ ] Step 2: Implement index + palette; wire header button + shortcut
-- [ ] Step 3: Verify gate + build; commit `feat: global command palette search`
+- [x] Step 1: Failing tests: ranking (startsWith beats substring), type filter, empty query → []
+- [x] Step 2: Implement index + palette; wire header button + shortcut
+- [x] Step 3: Verify gate + build; commit `feat: global command palette search`
 
 ---
 
@@ -480,11 +480,11 @@
 - Modify: components flagged in audit
 - Create: `README.md` (features, architecture, data sources, commands, screenshots section)
 
-- [ ] Step 1: Audit pass: keyboard nav through header/palette/quiz/tabs; focus-visible styles; aria-labels on icon buttons; table semantics; color contrast on team chips (add text-shadow/contrast guard fn `readableTextOn(bgHex)` in format.ts + test)
-- [ ] Step 2: Reduced-motion sweep (every motion component honors setting), skeleton coverage sweep, image/font optimization check
-- [ ] Step 3: `not-found.tsx` (checkered flag themed), `error.tsx` (red flag themed), sitemap/robots/metadata
-- [ ] Step 4: Full gate: tsc, lint, vitest, `npm run build`; manual smoke via dev server on key routes
-- [ ] Step 5: Write README; commit `feat: polish pass — a11y, SEO, error surfaces, README`
+- [x] Step 1: Audit pass: keyboard nav through header/palette/quiz/tabs; focus-visible styles; aria-labels on icon buttons; table semantics; color contrast on team chips (add text-shadow/contrast guard fn `readableTextOn(bgHex)` in format.ts + test)
+- [x] Step 2: Reduced-motion sweep (every motion component honors setting), skeleton coverage sweep, image/font optimization check
+- [x] Step 3: `not-found.tsx` (checkered flag themed), `error.tsx` (red flag themed), sitemap/robots/metadata
+- [x] Step 4: Full gate: tsc, lint, vitest, `npm run build`; manual smoke via dev server on key routes
+- [x] Step 5: Write README; commit `feat: polish pass — a11y, SEO, error surfaces, README`
 
 ---
 
