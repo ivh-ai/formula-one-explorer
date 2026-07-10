@@ -65,7 +65,9 @@
       "Bash(git commit -q -m 'feat: live race center *)",
       "Bash(git commit -q -m 'feat: driver comparison tool *)",
       "Bash(git commit -q -m 'feat: championship, tire strategy, and pit stop simulators *)",
-      "Bash(git commit -q -m 'feat: global command palette search *)"
+      "Bash(git commit -q -m 'feat: global command palette search *)",
+      "Bash(sed -i '' 's/^- \\\\[ \\\\] /- [x] /' docs/superpowers/plans/2026-07-09-formula-one-explorer.md)",
+      "Bash(git commit -q -m 'feat: polish pass — a11y, SEO, error surfaces, rate-limit resilience, README *)"
     ]
   }
 }

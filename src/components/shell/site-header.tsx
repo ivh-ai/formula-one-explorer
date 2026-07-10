@@ -57,7 +57,7 @@ function NavDropdown({ group, activePath }: { group: NavGroup; activePath: strin
 
 export function SiteHeader({ onSearchOpen }: { onSearchOpen?: () => void }) {
   const pathname = usePathname();
-  const { settings, setTheme } = useSettings();
+  const { setTheme } = useSettings();
 
   const toggleTheme = () => {
     const isDark = document.documentElement.classList.contains("dark");
@@ -97,7 +97,7 @@ export function SiteHeader({ onSearchOpen }: { onSearchOpen?: () => void }) {
           <Button
             variant="ghost"
             size="icon"
-            aria-label={settings.theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            aria-label="Toggle light/dark theme"
             onClick={toggleTheme}
           >
             <Sun className="size-4 dark:hidden" aria-hidden />

@@ -57,8 +57,11 @@ async function attempt<T>(
         status: response.status,
         message: `HTTP ${response.status} for ${url}`,
       };
-      // Server errors are worth retrying; client errors are not.
-      if (response.status >= 500) return { done: false, error };
+      // Server errors and rate limits are worth retrying; other client
+      // errors are not.
+      if (response.status >= 500 || response.status === 429) {
+        return { done: false, error };
+      }
       return { done: true, result: { ok: false, error } };
     }
 

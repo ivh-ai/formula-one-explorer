@@ -47,17 +47,24 @@ export function useLiveTiming(
     queryKey: ["openf1", "timing", sessionKey],
     queryFn: async () => {
       const key = sessionKey!;
-      const [positions, intervals, laps, stints, pits, raceControl, weather, radio] =
-        await Promise.all([
-          getPositions(key),
-          getIntervals(key),
-          getLaps(key),
-          getStints(key),
-          getPits(key),
-          getRaceControl(key),
-          getSessionWeather(key),
-          getTeamRadio(key),
-        ]);
+      // OpenF1's free tier rate-limits parallel bursts — fetch sequentially
+      // with small gaps. Total ~2s, comfortably inside the 4s poll interval.
+      const pause = () => new Promise((resolve) => setTimeout(resolve, 200));
+      const positions = await getPositions(key);
+      await pause();
+      const intervals = await getIntervals(key);
+      await pause();
+      const laps = await getLaps(key);
+      await pause();
+      const stints = await getStints(key);
+      await pause();
+      const pits = await getPits(key);
+      await pause();
+      const raceControl = await getRaceControl(key);
+      await pause();
+      const weather = await getSessionWeather(key);
+      await pause();
+      const radio = await getTeamRadio(key);
 
       return {
         positions: unwrap(positions, []),

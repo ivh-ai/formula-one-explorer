@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Formula One Explorer
 
-## Getting Started
+The definitive destination for learning, exploring and following Formula One —
+an interactive course for newcomers and a live/historical data companion for
+fans. Built with Next.js, running entirely on free, keyless public APIs:
+clone it and `npm run dev`, no accounts or secrets required.
 
-First, run the development server:
+## Features
+
+- **Learn Formula One** — an interactive 22-lesson course (foundations,
+  machinery, race craft, rules, deep dives) with SVG diagrams, quizzes,
+  flashcards, key takeaways and misconception-busting. Progress is saved
+  locally.
+- **Live Race Center** — live leaderboard with gaps, intervals, tires and pit
+  stops, race-control flag feed, trackside weather and team radio. Polls every
+  4 seconds during sessions and gracefully replays the latest completed
+  session in between, with a clear LIVE / REPLAY status badge.
+- **Season archive, 1950–present** — every championship: calendars, race /
+  qualifying / sprint results, standings, and editorial notes on landmark
+  seasons.
+- **Drivers & teams** — profiles for the current grid and the legends: career
+  statistics computed from full race history, bios, driving styles, rivalries
+  and season-by-season breakdowns.
+- **Circuits** — animated SVG track maps with DRS zones, corner-by-corner
+  guides, strategy notes, live weather forecasts and past winners for the full
+  current calendar.
+- **Standings & statistics** — championship tables with cumulative points
+  progression charts, all-time record boards, and the current season in
+  numbers.
+- **Interactive tools** — driver comparison with normalized radar charts, a
+  championship permutation simulator, a two-strategy tire model, and a pit
+  stop reaction game.
+- **Global search** — ⌘K command palette across drivers, teams, circuits,
+  lessons, glossary (100+ terms), rules and every season.
+- **History** — the sport's ten eras as an editorial timeline with defining
+  cars, drivers and moments.
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev       # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Other commands:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build     # production build
+npm test          # unit tests (Vitest)
+npm run lint      # ESLint
+npm run typecheck # tsc --noEmit
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Architecture
 
-## Learn More
+- **Framework** — Next.js (App Router, React Server Components), strict
+  TypeScript, Tailwind CSS v4, shadcn/ui, Motion (Framer Motion), Recharts.
+- **Data layer** (`src/lib/api/`) — a resilient `fetchJson` wrapper (timeout,
+  retry with backoff, typed `ApiResult` errors) beneath three clients:
+  - [Jolpica](https://jolpi.ca) (Ergast successor): all seasons since 1950 —
+    schedules, results, standings, drivers, constructors, circuits.
+  - [OpenF1](https://openf1.org): live session data — positions, intervals,
+    laps, stints, pits, race control, weather, radio.
+  - [Open-Meteo](https://open-meteo.com): circuit weather forecasts.
+- **Caching** — tiered Next.js fetch revalidation: completed seasons are
+  cached indefinitely (immutable), current-season data revalidates hourly,
+  schedules every 15 minutes, live data is polled client-side via TanStack
+  Query. There is no database.
+- **Domain models** (`src/lib/models/`) — raw API shapes never leave the API
+  layer; pages consume typed domain models only.
+- **Content** (`src/content/`) — all editorial material (lessons, glossary,
+  circuit guides, track SVGs, team/driver enrichment, historical notes) ships
+  as typed TypeScript modules, validated by unit tests.
+- **Business logic** (`src/lib/services/`) — championship math, career
+  aggregation, leaderboard building, simulators and search — all unit tested.
 
-To learn more about Next.js, take a look at the following resources:
+## Accessibility & performance
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Keyboard-navigable throughout, including the command palette and quizzes.
+- All animation respects `prefers-reduced-motion` plus an in-app toggle.
+- Skeleton loaders and inline degraded-state notices on every async surface;
+  API failures never take down a whole page.
+- Historical pages are statically generated or cached indefinitely.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Data attribution
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Data courtesy of the Jolpica F1, OpenF1 and Open-Meteo public APIs. Flags by
+flagcdn. This is an unofficial fan project, not associated with Formula 1
+companies. F1 and related marks are trademarks of Formula One Licensing B.V.

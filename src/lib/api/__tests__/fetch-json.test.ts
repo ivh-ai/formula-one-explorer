@@ -61,6 +61,20 @@ describe("fetchJson", () => {
     expect(fetchMock).toHaveBeenCalledTimes(3);
   });
 
+  it("retries a 429 rate limit and succeeds on the second attempt", async () => {
+    const fetchMock = vi
+      .spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce(jsonResponse({ message: "slow down" }, 429))
+      .mockResolvedValueOnce(jsonResponse({ recovered: true }));
+
+    const promise = fetchJson<{ recovered: boolean }>("https://example.test/limited");
+    await vi.runAllTimersAsync();
+    const result = await promise;
+
+    expect(result).toEqual({ ok: true, data: { recovered: true } });
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+
   it("retries a network failure and succeeds on the second attempt", async () => {
     const fetchMock = vi
       .spyOn(globalThis, "fetch")

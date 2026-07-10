@@ -22,6 +22,13 @@ export const metadata: Metadata = {
   },
   description:
     "The definitive destination for Formula One: an interactive course for newcomers, live timing and deep statistics for fans, and every season since 1950.",
+  openGraph: {
+    title: "F1 Explorer",
+    description:
+      "Learn, explore and follow Formula One — interactive lessons, live timing, and every season since 1950.",
+    type: "website",
+    siteName: "F1 Explorer",
+  },
 };
 
 export default function RootLayout({
