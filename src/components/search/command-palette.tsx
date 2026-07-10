@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -61,7 +61,7 @@ export function CommandPalette({
   const router = useRouter();
   const [query, setQuery] = useState("");
 
-  const staticIndex = useMemo(buildStaticIndex, []);
+  const staticIndex = useMemo(() => buildStaticIndex(), []);
 
   const dynamicDocs = useQuery({
     queryKey: ["search-dynamic"],
@@ -94,14 +94,15 @@ export function CommandPalette({
     }));
   }, [results]);
 
-  useEffect(() => {
-    if (!open) setQuery("");
-  }, [open]);
+  const close = (nextOpen: boolean) => {
+    if (!nextOpen) setQuery("");
+    onOpenChange(nextOpen);
+  };
 
   return (
     <CommandDialog
       open={open}
-      onOpenChange={onOpenChange}
+      onOpenChange={close}
       title="Global search"
       description="Search drivers, teams, circuits, lessons, glossary, seasons and rules"
     >
@@ -124,7 +125,7 @@ export function CommandPalette({
                   key={doc.id}
                   value={doc.id}
                   onSelect={() => {
-                    onOpenChange(false);
+                    close(false);
                     router.push(doc.href);
                   }}
                 >
