@@ -60,7 +60,8 @@
       "Bash(git commit -q -m 'feat: statistics explorer with records and season-in-numbers *)",
       "Bash(git commit -q -m 'feat: learning platform infrastructure and all 22 lessons *)",
       "Bash(python3 -)",
-      "Bash(git commit -q -m 'feat: learn hub, lesson pages, glossary and rules reference *)"
+      "Bash(git commit -q -m 'feat: learn hub, lesson pages, glossary and rules reference *)",
+      "Bash(git commit -q -m 'feat: live timing hooks and leaderboard builder *)"
     ]
   }
 }
