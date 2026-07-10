@@ -64,7 +64,8 @@
       "Bash(git commit -q -m 'feat: live timing hooks and leaderboard builder *)",
       "Bash(git commit -q -m 'feat: live race center *)",
       "Bash(git commit -q -m 'feat: driver comparison tool *)",
-      "Bash(git commit -q -m 'feat: championship, tire strategy, and pit stop simulators *)"
+      "Bash(git commit -q -m 'feat: championship, tire strategy, and pit stop simulators *)",
+      "Bash(git commit -q -m 'feat: global command palette search *)"
     ]
   }
 }
