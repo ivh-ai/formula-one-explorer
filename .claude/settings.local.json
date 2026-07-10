@@ -62,7 +62,8 @@
       "Bash(python3 -)",
       "Bash(git commit -q -m 'feat: learn hub, lesson pages, glossary and rules reference *)",
       "Bash(git commit -q -m 'feat: live timing hooks and leaderboard builder *)",
-      "Bash(git commit -q -m 'feat: live race center *)"
+      "Bash(git commit -q -m 'feat: live race center *)",
+      "Bash(git commit -q -m 'feat: driver comparison tool *)"
     ]
   }
 }
