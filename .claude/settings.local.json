@@ -58,7 +58,9 @@
       "Bash(git commit -q -m 'feat: seasons archive and race detail pages *)",
       "Bash(git commit -q -m 'feat: history section with era timeline *)",
       "Bash(git commit -q -m 'feat: statistics explorer with records and season-in-numbers *)",
-      "Bash(git commit -q -m 'feat: learning platform infrastructure and all 22 lessons *)"
+      "Bash(git commit -q -m 'feat: learning platform infrastructure and all 22 lessons *)",
+      "Bash(python3 -)",
+      "Bash(git commit -q -m 'feat: learn hub, lesson pages, glossary and rules reference *)"
     ]
   }
 }

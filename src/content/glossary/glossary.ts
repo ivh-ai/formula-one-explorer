@@ -25,6 +25,8 @@ function entry(
     term,
     slug: term
       .toLowerCase()
+      .normalize("NFD")
+      .replaceAll(/[\u0300-\u036f]/g, "")
       .replaceAll(/[^a-z0-9]+/g, "-")
       .replaceAll(/^-|-$/g, ""),
     definition,
@@ -116,7 +118,7 @@ export const GLOSSARY: GlossaryEntry[] = [
 
   // Rules
   entry("Parc fermé", "rules", "The 'closed park' rules freezing car setup from qualifying until the race. Significant changes mean a pit-lane start.", ["setup"]),
-  entry("Qualifying", "rules", "The Saturday knockout session (Q1, Q2, Q3) that sets the starting grid.", ["pole-position", "107-percent-rule"]),
+  entry("Qualifying", "rules", "The Saturday knockout session (Q1, Q2, Q3) that sets the starting grid.", ["pole-position", "107-rule"]),
   entry("Sprint", "rules", "A ~100 km Saturday race at selected events with points for the top eight (8-7-6-5-4-3-2-1) and its own qualifying session.", ["sprint-qualifying"]),
   entry("Sprint Qualifying", "rules", "The shorter SQ1/SQ2/SQ3 knockout session that sets the sprint race grid at sprint weekends.", ["sprint"]),
   entry("107% rule", "rules", "Drivers must qualify within 107% of the fastest Q1 time to be allowed to race (stewards can grant exceptions).", ["qualifying"]),
