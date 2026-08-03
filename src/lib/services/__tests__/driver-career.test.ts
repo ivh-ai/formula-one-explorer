@@ -90,7 +90,7 @@ const standings: SeasonStanding[] = [
 ];
 
 describe("buildCareerSummary", () => {
-  const summary = buildCareerSummary(results, standings);
+  const summary = buildCareerSummary("test", results, standings);
 
   it("counts starts, wins, podiums, poles, fastest laps and points", () => {
     expect(summary.starts).toBe(3);
@@ -101,8 +101,13 @@ describe("buildCareerSummary", () => {
     expect(summary.points).toBe(40);
   });
 
-  it("counts championships from standings position 1", () => {
-    expect(summary.championships).toBe(1);
+  it("counts championships from the authoritative champions map by driverId", () => {
+    // "test" is not a champion.
+    expect(summary.championships).toBe(0);
+    // Real champions resolve to their exact title counts.
+    expect(buildCareerSummary("hamilton", results, standings).championships).toBe(7);
+    expect(buildCareerSummary("max_verstappen", results, standings).championships).toBe(4);
+    expect(buildCareerSummary("michael_schumacher", results, standings).championships).toBe(7);
   });
 
   it("identifies first and last races", () => {

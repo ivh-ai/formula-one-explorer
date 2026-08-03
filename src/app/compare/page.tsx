@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import {
   getDriver,
   getDriverResults,
-  getDriverSeasonsStandings,
   getDriverStandings,
 } from "@/lib/api/jolpica";
 import { buildCareerSummary, type CareerSummary } from "@/lib/services/driver-career";
@@ -47,18 +46,18 @@ const LEGENDS: Record<string, string> = {
 async function loadCareer(
   driverId: string,
 ): Promise<{ driver: DriverRef; summary: CareerSummary } | null> {
-  const [driver, results, standings] = await Promise.all([
+  // The comparison view needs career totals (from race results) and title
+  // counts (from the static champions map) — not the per-season standings
+  // table — so we skip that expensive fan-out here to stay fast for two
+  // drivers at once.
+  const [driver, results] = await Promise.all([
     getDriver(driverId),
     getDriverResults(driverId),
-    getDriverSeasonsStandings(driverId),
   ]);
   if (!driver.ok || !driver.data) return null;
   return {
     driver: driver.data,
-    summary: buildCareerSummary(
-      results.ok ? results.data : [],
-      standings.ok ? standings.data : [],
-    ),
+    summary: buildCareerSummary(driverId, results.ok ? results.data : [], []),
   };
 }
 

@@ -47,6 +47,50 @@ function get<T>(path: string, revalidate: Revalidate): Promise<ApiResult<T>> {
   return fetchJson<T>(`${BASE}${path}`, { revalidate });
 }
 
+/**
+ * Run async tasks with bounded concurrency, preserving input order. Used to
+ * fan out per-season standings requests without bursting past Jolpica's rate
+ * limit (fetchJson also retries 429s as a backstop).
+ */
+async function mapWithConcurrency<T, R>(
+  items: T[],
+  limit: number,
+  task: (item: T) => Promise<R>,
+): Promise<R[]> {
+  const results: R[] = new Array(items.length);
+  let cursor = 0;
+  async function worker() {
+    while (cursor < items.length) {
+      const index = cursor;
+      cursor += 1;
+      results[index] = await task(items[index]);
+    }
+  }
+  const workers = Array.from({ length: Math.min(limit, items.length) }, () =>
+    worker(),
+  );
+  await Promise.all(workers);
+  return results;
+}
+
+/** Seasons a driver or constructor competed in. */
+async function getEntitySeasons(
+  entity: "drivers" | "constructors",
+  id: string,
+): Promise<ApiResult<number[]>> {
+  const result = await get<SeasonTableResponse>(
+    `/${entity}/${id}/seasons.json?limit=100`,
+    86_400,
+  );
+  if (!result.ok) return result;
+  return {
+    ok: true,
+    data: result.data.MRData.SeasonTable.Seasons.map((season) =>
+      Number.parseInt(season.season, 10),
+    ),
+  };
+}
+
 export async function getSeasons(): Promise<ApiResult<SeasonSummary[]>> {
   const result = await get<SeasonTableResponse>("/seasons.json?limit=100", 86_400);
   if (!result.ok) return result;
@@ -237,53 +281,78 @@ export type SeasonStanding = {
   constructors: ConstructorRef[];
 };
 
-/** A driver's final championship position for every season they raced. */
+/**
+ * A driver's final championship standing for every season they raced.
+ *
+ * Jolpica retired the unscoped `/drivers/{id}/driverstandings.json` endpoint
+ * (it now returns 400), so we discover the driver's seasons and fetch each
+ * season's scoped standing. Past seasons cache indefinitely, so the fan-out
+ * cost is paid once per driver.
+ */
 export async function getDriverSeasonsStandings(
   driverId: string,
 ): Promise<ApiResult<SeasonStanding[]>> {
-  const result = await get<StandingsResponse>(
-    `/drivers/${driverId}/driverstandings.json?limit=100`,
-    3600,
-  );
-  if (!result.ok) return result;
-  const lists = result.data.MRData.StandingsTable.StandingsLists;
+  const seasons = await getEntitySeasons("drivers", driverId);
+  if (!seasons.ok) return seasons;
+
+  const standings = await mapWithConcurrency(seasons.data, 6, async (year) => {
+    const result = await get<StandingsResponse>(
+      `/${year}/drivers/${driverId}/driverstandings.json`,
+      revalidateFor(year),
+    );
+    if (!result.ok) return null;
+    const raw = result.data.MRData.StandingsTable.StandingsLists[0]?.DriverStandings?.[0];
+    if (!raw) return null;
+    const mapped = mapDriverStanding(raw);
+    return {
+      season: year,
+      position: mapped.position,
+      points: mapped.points,
+      wins: mapped.wins,
+      constructors: mapped.constructors,
+    } satisfies SeasonStanding;
+  });
+
   return {
     ok: true,
-    data: lists.map((list) => {
-      const standing = list.DriverStandings?.[0];
-      const mapped = standing ? mapDriverStanding(standing) : null;
-      return {
-        season: Number.parseInt(list.season, 10),
-        position: mapped?.position ?? 0,
-        points: mapped?.points ?? 0,
-        wins: mapped?.wins ?? 0,
-        constructors: mapped?.constructors ?? [],
-      };
-    }),
+    data: standings
+      .filter((entry): entry is SeasonStanding => entry !== null)
+      .sort((a, b) => a.season - b.season),
   };
 }
 
-/** Final constructor standing per season for a constructor. */
+/**
+ * Final constructor standing per season for a constructor. Uses the same
+ * per-season fan-out as {@link getDriverSeasonsStandings} because the unscoped
+ * constructor-standings endpoint was likewise retired (now 400).
+ */
 export async function getConstructorSeasonsStandings(
   constructorId: string,
 ): Promise<ApiResult<{ season: number; standing: ConstructorStanding }[]>> {
-  const result = await get<StandingsResponse>(
-    `/constructors/${constructorId}/constructorstandings.json?limit=100`,
-    3600,
-  );
-  if (!result.ok) return result;
-  const lists = result.data.MRData.StandingsTable.StandingsLists;
-  const data: { season: number; standing: ConstructorStanding }[] = [];
-  for (const list of lists) {
-    const raw = list.ConstructorStandings?.[0];
-    if (raw) {
-      data.push({
-        season: Number.parseInt(list.season, 10),
-        standing: mapConstructorStanding(raw),
-      });
-    }
-  }
-  return { ok: true, data };
+  const seasons = await getEntitySeasons("constructors", constructorId);
+  if (!seasons.ok) return seasons;
+
+  const entries = await mapWithConcurrency(seasons.data, 6, async (year) => {
+    const result = await get<StandingsResponse>(
+      `/${year}/constructors/${constructorId}/constructorstandings.json`,
+      revalidateFor(year),
+    );
+    if (!result.ok) return null;
+    const raw =
+      result.data.MRData.StandingsTable.StandingsLists[0]?.ConstructorStandings?.[0];
+    if (!raw) return null;
+    return { season: year, standing: mapConstructorStanding(raw) };
+  });
+
+  return {
+    ok: true,
+    data: entries
+      .filter(
+        (entry): entry is { season: number; standing: ConstructorStanding } =>
+          entry !== null,
+      )
+      .sort((a, b) => a.season - b.season),
+  };
 }
 
 /** Winners of past races at a circuit (most recent first). */

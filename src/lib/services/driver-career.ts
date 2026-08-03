@@ -1,4 +1,5 @@
 import type { DriverRaceResult, SeasonStanding } from "@/lib/api/jolpica";
+import { getDriverChampionshipCount } from "@/content/history/champions";
 
 export type CareerSummary = {
   starts: number;
@@ -44,6 +45,7 @@ function formatYearRanges(years: number[]): string {
 }
 
 export function buildCareerSummary(
+  driverId: string,
   results: DriverRaceResult[],
   standings: SeasonStanding[],
 ): CareerSummary {
@@ -117,7 +119,7 @@ export function buildCareerSummary(
     poles,
     fastestLaps,
     points,
-    championships: standings.filter((entry) => entry.position === 1).length,
+    championships: getDriverChampionshipCount(driverId),
     firstRace: first ? { year: first.season, raceName: first.raceName } : null,
     lastRace: last ? { year: last.season, raceName: last.raceName } : null,
     teams: [...teamYears.entries()].map(([constructorId, team]) => ({

@@ -83,3 +83,100 @@ export const WORLD_CHAMPIONS: Record<number, Champion> = {
 export function getChampion(year: number): Champion | undefined {
   return WORLD_CHAMPIONS[year];
 }
+
+/**
+ * World Drivers' Champion by season, keyed by Jolpica driverId. Derived
+ * directly from the Jolpica standings API (year → position-1 driver), so it is
+ * authoritative and matches driver pages by id — no fragile name matching.
+ * Used to count a driver's titles without an expensive per-season fan-out.
+ */
+export const CHAMPION_DRIVER_IDS: Record<number, string> = {
+  1950: "farina",
+  1951: "fangio",
+  1952: "ascari",
+  1953: "ascari",
+  1954: "fangio",
+  1955: "fangio",
+  1956: "fangio",
+  1957: "fangio",
+  1958: "hawthorn",
+  1959: "jack_brabham",
+  1960: "jack_brabham",
+  1961: "phil_hill",
+  1962: "hill",
+  1963: "clark",
+  1964: "surtees",
+  1965: "clark",
+  1966: "jack_brabham",
+  1967: "hulme",
+  1968: "hill",
+  1969: "stewart",
+  1970: "rindt",
+  1971: "stewart",
+  1972: "emerson_fittipaldi",
+  1973: "stewart",
+  1974: "emerson_fittipaldi",
+  1975: "lauda",
+  1976: "hunt",
+  1977: "lauda",
+  1978: "mario_andretti",
+  1979: "scheckter",
+  1980: "jones",
+  1981: "piquet",
+  1982: "keke_rosberg",
+  1983: "piquet",
+  1984: "lauda",
+  1985: "prost",
+  1986: "prost",
+  1987: "piquet",
+  1988: "senna",
+  1989: "prost",
+  1990: "senna",
+  1991: "senna",
+  1992: "mansell",
+  1993: "prost",
+  1994: "michael_schumacher",
+  1995: "michael_schumacher",
+  1996: "damon_hill",
+  1997: "villeneuve",
+  1998: "hakkinen",
+  1999: "hakkinen",
+  2000: "michael_schumacher",
+  2001: "michael_schumacher",
+  2002: "michael_schumacher",
+  2003: "michael_schumacher",
+  2004: "michael_schumacher",
+  2005: "alonso",
+  2006: "alonso",
+  2007: "raikkonen",
+  2008: "hamilton",
+  2009: "button",
+  2010: "vettel",
+  2011: "vettel",
+  2012: "vettel",
+  2013: "vettel",
+  2014: "hamilton",
+  2015: "hamilton",
+  2016: "rosberg",
+  2017: "hamilton",
+  2018: "hamilton",
+  2019: "hamilton",
+  2020: "hamilton",
+  2021: "max_verstappen",
+  2022: "max_verstappen",
+  2023: "max_verstappen",
+  2024: "max_verstappen",
+  2025: "norris",
+};
+
+const TITLES_BY_DRIVER_ID: Record<string, number> = Object.values(
+  CHAMPION_DRIVER_IDS,
+).reduce<Record<string, number>>((acc, driverId) => {
+  acc[driverId] = (acc[driverId] ?? 0) + 1;
+  return acc;
+}, {});
+
+/** Number of World Drivers' Championships won by a driver (by Jolpica id). */
+export function getDriverChampionshipCount(driverId: string): number {
+  return TITLES_BY_DRIVER_ID[driverId] ?? 0;
+}

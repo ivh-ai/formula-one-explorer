@@ -64,6 +64,7 @@ export default async function DriverPage({
   const profile = driver.data;
   const meta = getDriverMeta(driverId);
   const summary = buildCareerSummary(
+    driverId,
     results.ok ? results.data : [],
     standings.ok ? standings.data : [],
   );
