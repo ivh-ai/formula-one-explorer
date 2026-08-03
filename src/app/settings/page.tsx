@@ -89,6 +89,16 @@ export default function SettingsPage() {
             <a className="font-medium underline" href="https://open-meteo.com">Open-Meteo</a>{" "}
             — circuit weather forecasts.
           </p>
+          <p>
+            <a
+              className="font-medium underline"
+              href="https://www.openstreetmap.org/copyright"
+            >
+              OpenStreetMap
+            </a>{" "}
+            — circuit track layouts (© OpenStreetMap contributors, ODbL), via the
+            bacinger/f1-circuits dataset.
+          </p>
           <p className="text-muted-foreground">
             Data may lag official timing. This site is not associated with
             Formula 1 companies; F1 and related marks are trademarks of Formula

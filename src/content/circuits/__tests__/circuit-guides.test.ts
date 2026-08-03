@@ -34,10 +34,9 @@ describe("circuit guides and track paths", () => {
     for (const [id, track] of Object.entries(TRACK_PATHS)) {
       expect(track.path.trim().startsWith("M"), `${id} starts with M`).toBe(true);
       expect(track.path.trim().endsWith("Z"), `${id} closed loop`).toBe(true);
-      expect(track.drsZones.length, `${id} drs zones`).toBeGreaterThanOrEqual(1);
-      for (const zone of track.drsZones) {
-        expect(zone.path.trim().startsWith("M"), `${id} drs path`).toBe(true);
-      }
+      // Real geometry has many segments — a stylized loop would have far fewer.
+      expect((track.path.match(/L/g) ?? []).length, `${id} segment count`).toBeGreaterThan(40);
+      expect(track.viewBox.split(" ")).toHaveLength(4);
       expect(track.startFinish.x).toBeGreaterThan(0);
       expect(track.startFinish.y).toBeGreaterThan(0);
     }

@@ -56,7 +56,14 @@ export function SiteFooter() {
             <a href="https://open-meteo.com" className="underline hover:text-foreground">
               Open-Meteo
             </a>
-            . Unofficial fan project — not associated with Formula 1 companies.
+            . Track maps ©{" "}
+            <a
+              href="https://www.openstreetmap.org/copyright"
+              className="underline hover:text-foreground"
+            >
+              OpenStreetMap
+            </a>{" "}
+            contributors. Unofficial fan project — not associated with Formula 1 companies.
           </p>
           <Link href="/settings" className="underline hover:text-foreground">
             Settings

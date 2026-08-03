@@ -94,19 +94,30 @@ export default async function CircuitPage({
           {track ? (
             <>
               <TrackMap track={track} className="mx-auto max-h-96 w-full text-foreground" />
-              <div className="mt-3 flex items-center justify-center gap-6 text-xs text-muted-foreground">
+              <div className="mt-3 flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-xs text-muted-foreground">
                 <span className="inline-flex items-center gap-1.5">
                   <span aria-hidden className="inline-block h-1 w-6 rounded bg-current" /> Racing line
                 </span>
                 <span className="inline-flex items-center gap-1.5">
-                  <span aria-hidden className="inline-block h-1.5 w-6 rounded bg-[#22C55E]" /> DRS zone
+                  <span aria-hidden className="inline-block size-2.5 rounded-[2px] border border-current" /> Start / finish
                 </span>
-                <span>Stylized layout — not to scale</span>
+                <span>
+                  Layout ©{" "}
+                  <a
+                    href="https://www.openstreetmap.org/copyright"
+                    className="underline hover:text-foreground"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    OpenStreetMap
+                  </a>{" "}
+                  contributors
+                </span>
               </div>
             </>
           ) : (
             <p className="py-20 text-center text-sm text-muted-foreground">
-              No stylized map available for this historical circuit.
+              No track map available for this historical circuit.
             </p>
           )}
         </div>
