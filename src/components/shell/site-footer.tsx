@@ -43,28 +43,34 @@ export function SiteFooter() {
       </div>
       <div className="border-t">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-4 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <p>
-            Data:{" "}
-            <a href="https://jolpi.ca" className="underline hover:text-foreground">
-              Jolpica F1
-            </a>
-            ,{" "}
-            <a href="https://openf1.org" className="underline hover:text-foreground">
-              OpenF1
-            </a>
-            ,{" "}
-            <a href="https://open-meteo.com" className="underline hover:text-foreground">
-              Open-Meteo
-            </a>
-            . Track maps ©{" "}
-            <a
-              href="https://www.openstreetmap.org/copyright"
-              className="underline hover:text-foreground"
-            >
-              OpenStreetMap
-            </a>{" "}
-            contributors. Unofficial fan project — not associated with Formula 1 companies.
-          </p>
+          <div className="space-y-1.5">
+            <p className="text-foreground/90">
+              A fun AI project by Ishaan Hattangady — built with Claude Code for
+              learning and exploration.
+            </p>
+            <p>
+              Data:{" "}
+              <a href="https://jolpi.ca" className="underline hover:text-foreground">
+                Jolpica F1
+              </a>
+              ,{" "}
+              <a href="https://openf1.org" className="underline hover:text-foreground">
+                OpenF1
+              </a>
+              ,{" "}
+              <a href="https://open-meteo.com" className="underline hover:text-foreground">
+                Open-Meteo
+              </a>
+              . Track maps ©{" "}
+              <a
+                href="https://www.openstreetmap.org/copyright"
+                className="underline hover:text-foreground"
+              >
+                OpenStreetMap
+              </a>{" "}
+              contributors. Unofficial fan project — not associated with Formula 1 companies.
+            </p>
+          </div>
           <Link href="/settings" className="underline hover:text-foreground">
             Settings
           </Link>
